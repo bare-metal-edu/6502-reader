@@ -1,0 +1,27 @@
+# Basic workflow
+name: Build UF2
+
+# Controls when the action will run
+# Workflow begins with push or PR events
+# Focuses on the main branch only
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  grade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - uses: actions/checkout@v4.1.7
+      with:
+        fetch-depth: '0'
+    - name: Install pico-sdk
+      run: |
+        mkdir -p /tools
+        git clone https://github.com/raspberrypi/pico-sdk.git /tools
+    - name: Build UF2
+      run: |
+        rm -rf build && mkdir -p build && cd build && cmake -DPICO_BOARD=pico_w -DCMAKE_BUILD_TYPE:STRING=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_C_COMPILER:FILEPATH=/usr/bin/arm-none-eabi-gcc -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/arm-none-eabi-g++ --no-warn-unused-cli -S./. -G 'Unix Makefiles' ../ && make && cd ..
+    env:
+      PICO_SDK_PATH: "/tools/pico-sdk"
