@@ -20,6 +20,7 @@ jobs:
       run: |
         sudo mkdir -p /tools
         sudo git clone https://github.com/raspberrypi/pico-sdk.git /tools/pico-sdk
+        cd /tools/pico-sdk && git submodule init --update
     - name: Install build chain
       run: |
         sudo apt install gcc-arm-none-eabi
