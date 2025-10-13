@@ -26,5 +26,6 @@ jobs:
     - name: Build UF2
       run: |
         rm -rf build && mkdir -p build && cd build && cmake -DPICO_BOARD=pico_w -DCMAKE_BUILD_TYPE:STRING=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_C_COMPILER:FILEPATH=/usr/bin/arm-none-eabi-gcc -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/arm-none-eabi-g++ --no-warn-unused-cli -S./. -G 'Unix Makefiles' ../ && make && cd ..
-  env:
-    PICO_SDK_PATH: "/tools/pico-sdk"
+      env:
+        PICO_SDK_PATH: "/tools/pico-sdk"
+
