@@ -20,6 +20,9 @@ jobs:
       run: |
         sudo mkdir -p /tools
         sudo git clone https://github.com/raspberrypi/pico-sdk.git /tools
+    - name: Install build chain
+      run: |
+        sudo apt install gcc-arm-none-eabi
     - name: Build UF2
       run: |
         rm -rf build && mkdir -p build && cd build && cmake -DPICO_BOARD=pico_w -DCMAKE_BUILD_TYPE:STRING=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_C_COMPILER:FILEPATH=/usr/bin/arm-none-eabi-gcc -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/arm-none-eabi-g++ --no-warn-unused-cli -S./. -G 'Unix Makefiles' ../ && make && cd ..
