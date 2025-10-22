@@ -24,7 +24,7 @@ void gpio_callback(uint gpio, uint32_t events) {
         data = (data << 1) + bit;
     }
     printf("    ");
-    printf("%04x    %02x    %c", address, data, gpio_get(RW_PIN) ? 'r' : 'W');
+    printf("%04x    %02x    %c (%d)", address, data, gpio_get(RW_PIN) ? 'r' : 'W', gpio_get(RW_PIN));
     printf("\n");
 }
 
