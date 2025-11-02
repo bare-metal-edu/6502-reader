@@ -50,6 +50,7 @@ int main(void) {
     gpio_set_irq_enabled_with_callback(
         CLOCK_PIN,
         GPIO_IRQ_EDGE_RISE,
+        //GPIO_IRQ_EDGE_FALL,
         true,
         &gpio_callback
     );
